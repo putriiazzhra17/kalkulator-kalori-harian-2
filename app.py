@@ -8,6 +8,48 @@ st.set_page_config(
     layout="centered"
 )
 
+# Gaya CSS baru
+st.markdown("""
+<style>
+    .stApp {
+        background: linear-gradient(135deg, #d2f8f8, #e2f0cb);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #2d3436;
+        font-size: 18px;
+        padding: 10px;
+    }
+
+    .css-1d391kg, .css-1v3fvcr {
+        background-color: #ffffffaa !important;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h1, h2, h3, h4 {
+        color: #0e6251;
+    }
+
+    .stButton>button {
+        background-color: #00b894;
+        color: white;
+        font-weight: bold;
+        border-radius: 8px;
+        padding: 10px 20px;
+        transition: background-color 0.3s;
+    }
+
+    .stButton>button:hover {
+        background-color: #019875;
+    }
+
+    .css-1offfwp {
+        background-color: #ffeaa7 !important;
+        border-left: 5px solid #fab1a0;
+    }
+</style>
+""", unsafe_allow_html=True)
+
 # DATA MENU
 karbo = [("Nasi Putih", 175, "150 gram"), ("Nasi Merah", 150, "150 gram"),
          ("Kentang Rebus", 140, "200 gram"), ("Ubi Rebus", 120, "200 gram"),
@@ -29,7 +71,7 @@ susu = [("Susu Sapi", 150, "1 gelas"), ("Susu Kedelai", 100, "1 gelas"),
         ("Yoghurt", 120, "1 cup"), ("Susu Almond", 90, "1 gelas"),
         ("Susu Cokelat", 180, "1 gelas")]
 
-# Fungsi membuat rekomendasi menu lengkap
+# Fungsi buat menu
 def buat_menu_4_sehat_5_sempurna(jumlah=10):
     menu_list = []
     for _ in range(jumlah):
@@ -46,27 +88,13 @@ def buat_menu_4_sehat_5_sempurna(jumlah=10):
         menu_list.append(menu_str)
     return menu_list
 
-# Fungsi menghitung kalori
+# Fungsi hitung kalori
 def hitung_kalori(berat, tinggi, usia, gender, multiplier):
     if gender.lower() == "laki-laki":
         bmr = (10 * berat) + (6.25 * tinggi) - (5 * usia) + 5
     else:
         bmr = (10 * berat) + (6.25 * tinggi) - (5 * usia) - 161
     return round(bmr * multiplier)
-
-# Gaya CSS
-st.markdown("""
-<style>
-    .stApp {
-        background-color: #bab86c;
-        color: #333333;
-        font-size: 18px;
-    }
-    table {border: 2px solid #fb8e54;}
-    th {background-color: #fb8e54; color: white;}
-    td {background-color: #f3e9df; color: black;}
-</style>
-""", unsafe_allow_html=True)
 
 # Navigasi
 menu = st.sidebar.selectbox("Navigasi", [
@@ -76,23 +104,10 @@ menu = st.sidebar.selectbox("Navigasi", [
 # Halaman Utama
 if menu == "🌎Halaman Utama":
     st.warning('Tekan tombol panah di pojok kiri atas untuk melihat fitur')
-    st.markdown("""
-    <style>
-    .stApp {
-        background: linear-gradient(rgba(0, 0, 0, 0.80), rgba(0, 0, 0, 0.80)),
-                    url('https://www.freepik.com/free-vector/main-food-groups-macronutrients-vector_36612734.htm#fromView=search&page=1&position=16&uuid=70da64d6-0fb7-48b8-a3da-5917973cdf81&query=food+with+calculate+animation');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        color: white !important;
-    }
-    </style>
-    """, unsafe_allow_html=True)
-
     st.title("🍱Calorie Counting - Aplikasi Giziku")
     st.markdown("""
     Selamat datang di **kalkulator kalori harian**, tujuan aplikasi ini sederhana:
-    
+
     - 🔢 Menghitung kebutuhan kalori harian  
     - 🍽️ Mendapatkan rekomendasi menu 4 Sehat 5 Sempurna  
     - 💡 Informasi tentang Total Daily Energy Expenditure (TDEE) dan gizi seimbang  
