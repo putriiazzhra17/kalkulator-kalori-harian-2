@@ -8,28 +8,45 @@ st.set_page_config(
     layout="centered"
 )
 
-# Gaya CSS baru
+# CSS dengan gambar background di halaman utama
 st.markdown("""
 <style>
+    /* Background umum aplikasi */
     .stApp {
-        background: linear-gradient(135deg, #d2f8f8, #e2f0cb);
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         color: #2d3436;
         font-size: 18px;
         padding: 10px;
+        background: #f5f7fa;  /* fallback background */
     }
 
-    .css-1d391kg, .css-1v3fvcr {
-        background-color: #ffffffaa !important;
-        border-radius: 10px;
-        padding: 20px;
-        box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+    /* Background khusus halaman utama dengan gambar */
+    .page-main .stApp {
+        background-image: url('https://i.imgur.com/XGm7SnN.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        color: #fff;
+        text-shadow: 0 0 8px rgba(0,0,0,0.7);
+        padding: 40px 20px;
     }
 
+    /* Container putih transparan untuk teks supaya lebih jelas */
+    .page-main .css-1d391kg, .page-main .css-1v3fvcr {
+        background-color: rgba(255, 255, 255, 0.85) !important;
+        border-radius: 12px;
+        padding: 25px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+        color: #2d3436 !important;
+    }
+
+    /* Heading */
     h1, h2, h3, h4 {
         color: #0e6251;
+        text-shadow: none;
     }
 
+    /* Tombol */
     .stButton>button {
         background-color: #00b894;
         color: white;
@@ -43,12 +60,21 @@ st.markdown("""
         background-color: #019875;
     }
 
-    .css-1offfwp {
-        background-color: #ffeaa7 !important;
-        border-left: 5px solid #fab1a0;
+    /* Background kartu input dan output kalkulator */
+    .css-1d391kg, .css-1v3fvcr {
+        background-color: #ffffffcc !important;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Sidebar styling */
+    .css-1v3fvcr {
+        background-color: #ffffffcc !important;
     }
 </style>
 """, unsafe_allow_html=True)
+
 
 # DATA MENU
 karbo = [("Nasi Putih", 175, "150 gram"), ("Nasi Merah", 150, "150 gram"),
@@ -101,6 +127,10 @@ menu = st.sidebar.selectbox("Navigasi", [
     "🌎Halaman Utama", "🔢Kalkulator Kalori", "📖Tentang"
 ])
 
+# Beri kelas khusus agar CSS background gambar hanya untuk halaman utama
+if menu == "🌎Halaman Utama":
+    st.markdown('<div class="page-main">', unsafe_allow_html=True)
+
 # Halaman Utama
 if menu == "🌎Halaman Utama":
     st.warning('Tekan tombol panah di pojok kiri atas untuk melihat fitur')
@@ -113,6 +143,7 @@ if menu == "🌎Halaman Utama":
     - 💡 Informasi tentang Total Daily Energy Expenditure (TDEE) dan gizi seimbang  
     Silakan gunakan menu di sebelah kiri untuk mulai 🙋‍♀️🙋‍♂️
     """)
+    st.markdown('</div>', unsafe_allow_html=True)
 
 # Halaman Kalkulator Kalori
 elif menu == "🔢Kalkulator Kalori":
